@@ -1,0 +1,36 @@
+---
+# - name: "Prepare the {{ ansible_facts['distribution'] }} guest operating system."
+#   include_tasks: "{{ ansible_facts['distribution'] | lower }}.yml"
+#   when: "ansible_facts['distribution'] == 'Ubuntu'"
+- name: "Prepare the {{ ansible_facts['distribution'] }} guest operating system."
+  include_tasks: el.yml
+  when: "ansible_facts['distribution'] in ['RedHat', 'CentOS', 'Rocky', 'AlmaLinux', 'OracleLinux']"
+# - name: "Prepare the {{ ansible_facts['os_family'] }} guest operating system."
+#   ansible.builtin.include_tasks: windows.yml
+#   when: ansible_facts['os_family'] == 'Windows'
+
+###########################################################
+# Add Provider Archive at Specified location if Airgap Env
+###########################################################
+- name: Configure Airgap System
+  block:
+    - name: Create Provider Location on Host
+      ansible.builtin.file:
+        path: '{{ provider_archive_path }}'
+        owner: '{{ provider_archive_owner }}'
+        group: '{{ provider_archive_group }}'
+        mode: '{{ provider_archive_mode }}'
+        setype: '{{ provider_archive_setype }}'
+        state: directory
+    - name: Download Terraform Provider Archive to Host
+      ansible.builtin.unarchive:
+        src: '{{ provider_archive_url }}'
+        dest: '{{ provider_archive_path }}'
+        owner: '{{ provider_archive_owner }}'
+        group: '{{ provider_archive_group }}'
+        setype: '{{ provider_archive_setype }}'
+        keep_newer: '{{ provider_archive_keep_newer }}'
+        remote_src: true
+        validate_certs: '{{ trust_repository_certs }}'
+  when:
+    - airgap

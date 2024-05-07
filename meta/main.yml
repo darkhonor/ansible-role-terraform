@@ -1,0 +1,24 @@
+galaxy_info:
+  author: Alex Ackerman
+  description: Installs Terraform on a system to include support for airgap environments
+  role_name: terraform
+
+  issue_tracker_url: https://github.com/darkhonor/ansible-role-terraform/issues
+
+  license: MIT
+
+  min_ansible_version: '2.10'
+
+  platforms:
+  - name: EL
+    versions:
+    - '8'
+    - '9'
+  - name: OracleLinux
+    versions:
+    - '8'
+    - '9'
+
+  galaxy_tags: []
+
+dependencies: []

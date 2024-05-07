@@ -1,0 +1,13 @@
+---
+# defaults file for ansible-role-terraform
+airgap: false
+hashicorp_rpm_repo_url: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+hashicorp_gpg_key_url: https://rpm.releases.hashicorp.com/gpg
+trust_repository_certs: true
+provider_archive_url: https://localrepo.domain.local/terraform-providers.tar.gz
+provider_archive_path: /opt/terraform
+provider_archive_owner: root
+provider_archive_group: root
+provider_archive_mode: '0755'
+provider_archive_setype: usr_t
+provider_archive_keep_newer: false

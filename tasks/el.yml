@@ -1,0 +1,28 @@
+---
+###########################################################
+# Add HashiCorp Repository and GPG Key
+###########################################################
+- name: Add HashiCorp Repository
+  ansible.builtin.yum_repository:
+    name: hashicorp
+    description: HashiCorp Repository
+    baseurl: '{{ hashicorp_rpm_repo_url }}'
+    gpgcheck: true
+    gpgkey: '{{ hashicorp_gpg_key_url }}'
+    enabled: true
+    state: present
+- name: Install HashiCorp RPM Key
+  ansible.builtin.rpm_key:
+    key: '{{ hashicorp_gpg_key_url }}'
+    state: present
+    validate_certs: '{{ trust_repository_certs }}'
+
+###########################################################
+# Install Terraform App
+###########################################################
+- name: Install Terraform Application
+  ansible.builtin.dnf:
+    name:
+      - terraform
+    state: present
+    validate_certs: '{{ trust_repository_certs }}'
