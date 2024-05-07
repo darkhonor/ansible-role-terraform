@@ -9,7 +9,6 @@ None
 
 ## Role Variables
 
-
 You can modify any of the following variables as you wish in the role's `defaults/main.yml`:
 
 * `airgap`: Boolean if the target is in an airgap'd environment (Default: `false`)
@@ -17,13 +16,13 @@ You can modify any of the following variables as you wish in the role's `default
 * `hashicorp_gpg_key_url`: Full URL to the Hashicorp RPM GPG Key (Default: <https://rpm.releases.hashicorp.com/gpg>)
 * `trust_repository_certs`: Boolean if the source repository's certificate is trusted by the target (Default: `true`)
 * `provider_archive_url`: Full URL to an archive of the Terraform Providers (airgap only)
-* `provider_archive_path`: (airgap only; Default: `/opt/terraform`)
+* `provider_archive_path`: Path on the target to create and store the provider archive (airgap only; Default: `/opt/terraform`)
 
 The following role variables are *safe* defaults and should not need to be modified:
 
-* `provider_archive_owner`: Owner of the folder for the Provider archive (airgap only; Default: `root`)
-* `provider_archive_group`: Owner of the provider files (airgap only; Default: `root`)
-* `provider_archive_mode`: Group owner for the provider files (airgap only; Default: `0755`)
+* `provider_archive_owner`: File owner for the Provider archive (airgap only; Default: `root`)
+* `provider_archive_group`: Group owner for the provider files (airgap only; Default: `root`)
+* `provider_archive_mode`: Directory Mode for the provider files (airgap only; Default: `0755`)
 * `provider_archive_setype`: SELinux Type for provider files (airgap only; Default: `usr_t`)
 * `provider_archive_keep_newer`: Boolean if you want to preserve files locally that are newer than the files in the archive (airgap only; Default: `false`)
 
