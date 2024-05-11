@@ -1,4 +1,4 @@
-# Ansible Role: Kubernetes Apps
+# Ansible Role: Terraform
 
 Installs the Terraform application and (if required) the modules and plugins
 required to operate the application in an airgap environment.
